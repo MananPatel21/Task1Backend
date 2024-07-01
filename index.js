@@ -8,16 +8,20 @@ connectDB();
 
 const app = express();
 const bodyParser = require('body-parser')
-// Middleware
 
-const cors = require('cors');
+const corsOptions = {
+    origin: 'https://task1-frontend-smoky.vercel.app',
+    optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
 app.set('view engine', 'pug');
 app.use(express.json());
 app.use(fileUpload());
 app.use(express.static('public'));
 
 // app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+// app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
@@ -26,7 +30,6 @@ app.use(bodyParser.urlencoded({
 app.use('/api/company', companyRouter);
 app.use('/api/contact', contactRouter);
 
-// Start the server
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
