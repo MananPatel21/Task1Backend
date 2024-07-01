@@ -3,18 +3,14 @@ const fileUpload = require('express-fileupload');
 const { PORT, connectDB } = require('./config/database');
 const companyRouter = require('./routers/companyRouter');
 const contactRouter = require('./routers/contactRouter');
+const cors = require('cors');
 
 connectDB();
 
 const app = express();
 const bodyParser = require('body-parser')
 
-const corsOptions = {
-    origin: 'https://task1-frontend-smoky.vercel.app',
-    optionsSuccessStatus: 200
-};
-
-app.use(cors(corsOptions));
+app.use(cors());
 app.set('view engine', 'pug');
 app.use(express.json());
 app.use(fileUpload());
